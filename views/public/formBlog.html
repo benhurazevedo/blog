@@ -1,0 +1,38 @@
+<section >
+    {% if flash.getMessage("tituloErrado")[0] == "sim" %}
+        <p style="color: red;">
+            Favor preencher:
+            <ul>
+                <li>Título da postagem</li>
+            </ul>
+        </p>
+    {% endif %}
+    {% if flash.getMessage("textoErrado")[0] == "sim" %}
+        <p style="color: red;">
+            Favor preencher:
+            <ul>
+                <li>Texto da postagem</li>
+            </ul>
+        </p>
+    {% endif %}
+    {% if flash.getMessage("tudoErrado")[0] == "sim" %}
+        <p style="color: red;">
+            Favor preencher:
+            <ul>
+                <li>Título da postagem</li>
+                <li>Texto da postagem</li>
+            </ul>
+        </p>
+    {% endif %}
+    <form method="post" action="\gravarblog">
+        <input type="hidden" name="id" value="{{ post.id }}">
+        <label for="titulo">Titulo Postagem</label>
+        <input type="text" id="titulo" name="titulo" style="width: 100%;" value="{{ post.titulo }}">
+        <label for="texto">Texto</label>
+        <textarea id="texto" name="texto" rows="20" style="width: 100%;">{{ post.texto }}</textarea>
+        <p>
+            <input type="reset" value="limpar">
+            <input type="submit" value="Enviar">
+        </p>
+    </form>
+</section>

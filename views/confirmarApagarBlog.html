@@ -1,0 +1,28 @@
+{% extends 'public/template.html' %}
+{#================================================================================
+	Item Name: alteracao_saldo_devedor_sucesso.html
+	Version: 0.1
+	Author: benhur
+	benhur.azevedo@caixa.gov.br
+  ================================================================================#}
+
+  {% block title %}Confirmar Apagar Post{% endblock %}
+
+  {% block head %}{% endblock %}
+
+  {% block content %}
+  <div style="width: 1024px; padding: 4px;">
+    <head>
+        <h1>Visualizar Post</h1>
+    </head>
+    {{ include ('public/detalhesPost.html') }}
+    <form method='post' action="/apagarpost">
+        <input type="hidden" name="id" value="{{ post.getId() }}">
+        <p>Deseja realmente apagar este post?</p>
+        <p><a href="/visualizarblog/{{ post.getId() }}">Não</a>&nbsp;<input type="submit" value="sim"></p>
+    </form>
+    <a href="/listaposts">Voltar</a>
+  </div>
+  {% endblock %}
+
+  {% block tail %} {% endblock %}

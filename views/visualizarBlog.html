@@ -1,0 +1,25 @@
+{% extends 'public/template.html' %}
+{#================================================================================
+	Item Name: alteracao_saldo_devedor_sucesso.html
+	Version: 0.1
+	Author: benhur
+	benhur.azevedo@caixa.gov.br
+  ================================================================================#}
+
+  {% block title %}Visualizar Post{% endblock %}
+
+  {% block head %}{% endblock %}
+
+  {% block content %}
+  <div style="width: 1024px; padding: 4px;">
+    <head>
+        <h1>Visualizar Post</h1>
+    </head>
+    {{ include ('public/detalhesPost.html') }}
+    <p><a href="alterarblog/{{ post.getId() }}">Editar</a>&nbsp;<a href="/confirmarapagarblog/{{ post.getId() }}">Apagar</a></p>
+    {{ include ('public/comentarios.html')}}
+    <a href="/listaposts">Voltar</a>
+  </div>
+  {% endblock %}
+
+  {% block tail %} {% endblock %}

@@ -1,0 +1,5 @@
+composer.phar
+db.sqlite
+composer.lock
+vendor
+cache
