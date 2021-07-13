@@ -11,17 +11,23 @@
   {% block head %}{% endblock %}
 
   {% block content %}
-  <div style="width: 1024px; padding: 4px;">
-    <head>
-        <h1>Visualizar Post</h1>
-    </head>
-    {{ include ('public/detalhesPost.html') }}
-    <form method='post' action="/apagarpost">
-        <input type="hidden" name="id" value="{{ post.getId() }}">
-        <p>Deseja realmente apagar este post?</p>
-        <p><a href="/visualizarblog/{{ post.getId() }}">Não</a>&nbsp;<input type="submit" value="sim"></p>
-    </form>
-    <a href="/listaposts">Voltar</a>
+    <div class="card">
+      <div class="card-header text-white bg-primary">
+        <h2>Apagar Post</h2>
+      </div>
+      <div class="card-body">
+        {{ include ('public/detalhesPost.html') }}
+        <form method='post' action="/apagarpost">
+          <input type="hidden" name="id" value="{{ post.getId() }}">
+          <p>Deseja realmente apagar este post?</p>
+          <p><a class="btn btn-success" href="/visualizarblog/{{ post.getId() }}">Não</a>&nbsp;<input class="btn btn-danger" type="submit" value="sim"></p>
+        </form>
+      </div>
+      
+      <div class="card-footer bg-primary">
+        <a href="/listarblog" class="btn btn-light">Voltar</a>
+      </div>
+    </div>
   </div>
   {% endblock %}
 

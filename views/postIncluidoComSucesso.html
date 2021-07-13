@@ -11,8 +11,17 @@
   {% block head %}{% endblock %}
 
   {% block content %}
-  <h1>Post incluído com sucesso!</h1>
-  <p><a href="/listarblog">Voltar</a></p>
+  <div class="card">
+    <div class="card-header text-white bg-primary">
+      <h2>Mensagem do Site</h2>
+    </div>
+    <div class="card-body">
+      Post gravado com sucesso!
+    </div>
+    <div class="card-footer bg-primary">
+      <a href="/listarblog" class="btn btn-light">Voltar</a>
+    </div>
+  </div>
   {% endblock %}
 
   {% block tail %} {% endblock %}

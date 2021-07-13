@@ -1,0 +1,11 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "main": "index.php",
+  "repository": "https://github.com/benhurazevedo/blog.git",
+  "author": "benhur alencar azevedo <benhur.azevedo@hotmail.com>",
+  "license": "LGPL",
+  "dependencies": {
+    "popper.js": "^1.16.1"
+  }
+}

@@ -5,22 +5,18 @@ namespace controllers;
 final class BlogController
 {
     private $container;
-    private $BASE_URL;
     public function __construct($container)
     {
         $this->container = $container; #container de injecao de dependencia
-        $this->BASE_URL = $this->container['settings']['BASE_URL'];
     }
     public function incluirBlog($request, $response, array $args)
     {
         try {
             return $this->container['twig']->render($response, 'incluirBlog.html', [
-                'BASE_URL' =>  $this->BASE_URL
             ]);
         } catch (\Exception $e) {
             return $this->container['twig']->render($response, 'mensagem.html', [
-                'titulo'  => 'Falha no Sistema',
-                'mensagem'     => $e, 'BASE_URL'     =>  $this->BASE_URL
+                'titulo'  => 'Falha no Sistema'
             ]);
         }
     }
@@ -32,14 +28,12 @@ final class BlogController
         $post->setId($id);
         $post->setTitulo($postParams['titulo']);
         $post->setTexto($postParams['texto']);
-        #die(var_dump($post));
         if($post->getTitulo() == "" && $post->getTexto() == "")
         {
             $flashMessages = $this->container['flashMessages'];
             $flashMessages->addMessage('tudoErrado', "sim");
             return $this->container['twig']->render($response, 'incluirBlog.html', [
-                'BASE_URL' =>  $this->BASE_URL
-                ,'post' => $post
+                'post' => $post
             ]);
         }
         if($post->getTitulo() == "")
@@ -47,8 +41,7 @@ final class BlogController
             $flashMessages = $this->container['flashMessages'];
             $flashMessages->addMessage('tituloErrado', "sim");
             return $this->container['twig']->render($response, 'incluirBlog.html', [
-                'BASE_URL' =>  $this->BASE_URL
-                ,'post' => $post
+                'post' => $post
             ]);
         }
         if($post->getTexto() == "")
@@ -56,21 +49,20 @@ final class BlogController
             $flashMessages = $this->container['flashMessages'];
             $flashMessages->addMessage('textoErrado', "sim");
             return $this->container['twig']->render($response, 'incluirBlog.html', [
-                'BASE_URL' =>  $this->BASE_URL
-                ,'post' => $post
+                'post' => $post
             ]);
         }
-        if($post->getId() == null)
+        $em = $this->container['entityManager'];
+        if($post->getId() != null)
         {
-            $this->container['entityManager']->merge($post);
+            $em->merge($post);
         }
         else 
         {
-            $this->container['entityManager']->persist($post);
+            $em->persist($post);
         }
-        $this->container['entityManager']->flush();
+        $em->flush();
         return $this->container['twig']->render($response, 'postIncluidoComSucesso.html', [
-            'BASE_URL' =>  $this->BASE_URL
         ]);
     }
     public function alterarBlog($request, $response, array $args)
@@ -80,7 +72,7 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             $post = $this->container['entityManager']
@@ -89,17 +81,16 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             return $this->container['twig']->render($response, 'alterarBlog.html', [
-                'BASE_URL' =>  $this->BASE_URL
-                ,'post' => $post
+                'post' => $post
             ]);
         } catch (\Exception $e) {
             return $this->container['twig']->render($response, 'mensagem.html', [
                 'titulo'  => 'Falha no Sistema',
-                'mensagem'     => $e, 'BASE_URL'     =>  $this->BASE_URL
+                'mensagem'     => $e
             ]);
         }
     }
@@ -110,7 +101,7 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             $post = $this->container['entityManager']
@@ -119,17 +110,16 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             return $this->container['twig']->render($response, 'visualizarBlog.html', [
-                'BASE_URL' =>  $this->BASE_URL
-                ,'post' => $post
+                'post' => $post
             ]);
         } catch (\Exception $e) {
             return $this->container['twig']->render($response, 'mensagem.html', [
                 'titulo'  => 'Falha no Sistema',
-                'mensagem'     => $e, 'BASE_URL'     =>  $this->BASE_URL
+                'mensagem'     => $e
             ]);
         }
     }
@@ -141,7 +131,7 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             $post = $this->container['entityManager']
@@ -150,17 +140,16 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             return $this->container['twig']->render($response, 'confirmarApagarBlog.html', [
-                'BASE_URL' =>  $this->BASE_URL
-                ,'post' => $post
+                'post' => $post
             ]);
         } catch (\Exception $e) {
             return $this->container['twig']->render($response, 'mensagem.html', [
                 'titulo'  => 'Falha no Sistema',
-                'mensagem'     => $e, 'BASE_URL'     =>  $this->BASE_URL
+                'mensagem'     => $e
             ]);
         }
     }
@@ -170,14 +159,13 @@ final class BlogController
             $entityManager = $this->container['entityManager'];
             $posts = $entityManager->getRepository('Post')->findAll();
             return $this->container['twig']->render($response, 'listarblogs.html', [
-                'BASE_URL' =>  $this->BASE_URL
-                ,'temPosts' => count($posts) > 0
+                'temPosts' => count($posts) > 0
                 ,'posts' => $posts
             ]);
         } catch (\Exception $e) {
             return $this->container['twig']->render($response, 'mensagem.html', [
                 'titulo'  => 'Falha no Sistema',
-                'mensagem'     => $e, 'BASE_URL'     =>  $this->BASE_URL
+                'mensagem'     => $e
                 
             ]);
         }
@@ -210,7 +198,7 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             $post = $this->container['entityManager']
@@ -219,7 +207,7 @@ final class BlogController
             {
                 return $this->container['twig']->render($response, 'mensagem.html', [
                     'titulo'  => 'Post inexistente',
-                    'mensagem'     => "O post requisitado não existe.", 'BASE_URL'     =>  $this->BASE_URL
+                    'mensagem'     => "O post requisitado não existe."
                 ]);
             }
             $this->container['entityManager']->remove($post);
@@ -228,7 +216,7 @@ final class BlogController
         } catch (\Exception $e) {
             return $this->container['twig']->render($response, 'mensagem.html', [
                 'titulo'  => 'Falha no Sistema',
-                'mensagem'     => $e, 'BASE_URL'     =>  $this->BASE_URL
+                'mensagem'     => $e
             ]);
         }
     }

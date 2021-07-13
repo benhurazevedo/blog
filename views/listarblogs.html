@@ -11,22 +11,27 @@
   {% block head %}{% endblock %}
 
   {% block content %}
-  <div style="width: 1024px; padding: 4px;">
-    {% if temPosts %}
-      {% for post in posts %}
-      <section>
-          <h2>{{ post.getTitulo() }} - <a href="/visualizarblog/{{ post.getId() }}">Visualizar</a></h2>
-          <p>{{ post.getTexto() }}</p>
-
-      </section>
-      {% endfor %}
-    {% else %}
-      <section>
-        <h3>Não há posts!</h3>
-      </section>
-    {% endif %}
+  <div class="row">
+    <div class="col-md-12">
+      {% if temPosts %}
+        <ul class="list-group">
+        {% for post in posts %}
+          <li class="list-group-item">{{ post.getTitulo() }} - <a href="/visualizarblog/{{ post.getId() }}"><span class="badge badge-primary">Visualizar</span></a></li>
+        {% endfor %}
+        </ul>
+      {% else %}
+        <section>
+          <h3>Não há posts!</h3>
+        </section>
+      {% endif %}
+    </div>
   </div>
-  <a href="/incluirblog">Incluir post</a>
+  <div class="row">
+    <div class="col-md-12">
+      <p><br><a href="/incluirblog" class="btn btn-primary">Incluir post</a></p>
+    </div>
+  </div>
+ 
   {% endblock %}
 
   {% block tail %} {% endblock %}

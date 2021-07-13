@@ -22,6 +22,7 @@ $container['twig'] = function($container)
     $twigSettings = $container->get('settings')['twig'];
     $view = new Twig($twigSettings['templates-folder'], array('cache' => $twigSettings['cache'], 'debug' => $twigSettings['debug']));
 	$view->getEnvironment()->addGlobal('flash', $container['flashMessages']);
+	$view->getEnvironment()->addGlobal('BASE_URL', $container->get('settings')['BASE_URL']);
 	return $view;
 };
 

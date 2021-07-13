@@ -11,11 +11,14 @@
         <input type="hidden" name="postId" value="{{ post.getId() }}">
         <label for="comentario">Escreva um comentario</label>
         <textarea id="comentario" name="comentario" rows="2" style="width: 100%;"></textarea>
-        <input type="submit" value="enviar">
+        <input type="submit" class="btn btn-success" value="enviar">
+        <br><br>
     </form>
     <div>
-        {% for comentario in post.getComentarios().toArray() %}
-            <p>{{ comentario.getComentario() }}</p>
-        {% endfor %}
+        <ul class="list-group">
+            {% for comentario in post.getComentarios().toArray() %}
+                <li class="list-group-item">{{ comentario.getComentario() }}</li>
+            {% endfor %}
+        </ul>
     </div>
 </section>

@@ -16,7 +16,9 @@
         "bryanjhv/slim-session": "^3.6",
         "adldap2/adldap2": "^10.0",
         "doctrine/orm": "2.6.2",
-        "symfony/yaml": "2.*"
+        "symfony/yaml": "2.*",
+        "twbs/bootstrap": "^4.3",
+        "components/jquery": "^3.5"
     },
     "autoload" : {
         "psr-4": {

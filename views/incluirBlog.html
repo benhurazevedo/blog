@@ -11,11 +11,16 @@
   {% block head %}{% endblock %}
 
   {% block content %}
-  <div style="width: 1024px; padding: 4px;">
-    <head>
-        <h1>Incluir Post</h1>
-    </head>
-    {{ include ('public/formBlog.html') }}
+  <div class="card">
+    <div class="card-header text-white bg-primary">
+      <h2>Incluir Post</h2>
+    </div>
+    <div class="card-body">
+      {{ include ('public/formBlog.html') }}
+    </div>
+    <div class="card-footer bg-primary">
+      <a href="/listarblog" class="btn btn-light">Voltar</a>
+    </div>
   </div>
   {% endblock %}
 

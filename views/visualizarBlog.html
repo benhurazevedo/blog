@@ -11,14 +11,19 @@
   {% block head %}{% endblock %}
 
   {% block content %}
-  <div style="width: 1024px; padding: 4px;">
-    <head>
-        <h1>Visualizar Post</h1>
-    </head>
-    {{ include ('public/detalhesPost.html') }}
-    <p><a href="alterarblog/{{ post.getId() }}">Editar</a>&nbsp;<a href="/confirmarapagarblog/{{ post.getId() }}">Apagar</a></p>
-    {{ include ('public/comentarios.html')}}
-    <a href="/listaposts">Voltar</a>
+  
+  <div class="card">
+    <div class="card-header text-white bg-primary">
+      <h2>Visualizar Post</h2>
+    </div>
+    <div class="card-body">
+      {{ include ('public/detalhesPost.html') }}
+      <p><a class="btn btn-danger" href="/confirmarapagarblog/{{ post.getId() }}">Apagar</a>&nbsp;<a class="btn btn-primary" href="alterarblog/{{ post.getId() }}">Editar</a>&nbsp;</p>
+      {{ include ('public/comentarios.html')}}
+    </div>
+    <div class="card-footer bg-primary">
+      <a href="/listarblog" class="btn btn-light">Voltar</a>
+    </div>
   </div>
   {% endblock %}
 
